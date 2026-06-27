@@ -519,6 +519,22 @@
     bgm.volume = parseFloat(volSlider.value);
     let isPlaying = false;
     let panelOpen = false;
+    let pausedByVisibility = false;
+
+    // Pause when tab hidden, resume when tab visible again
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (isPlaying) {
+          bgm.pause();
+          pausedByVisibility = true;
+        }
+      } else {
+        if (pausedByVisibility) {
+          bgm.play().catch(() => {});
+          pausedByVisibility = false;
+        }
+      }
+    });
 
     function startMusic() {
       bgm.play().then(() => {
