@@ -556,15 +556,21 @@
       }, 500);
     }
 
-    // Open letter — push state so browser back works
+    // Open letter — push state: envelope → letter
     openBtn.addEventListener('click', () => {
       history.pushState({ page: 'letter' }, '');
       showLetter();
     });
 
-    // Browser/phone back button
-    window.addEventListener('popstate', () => {
-      showEnvelope();
+    // Browser/phone back
+    window.addEventListener('popstate', (e) => {
+      if (lightbox.classList.contains('open')) {
+        // back while lightbox open → just close lightbox, stay in letter
+        closeLightbox();
+      } else {
+        // back while in letter → go to envelope
+        showEnvelope();
+      }
     });
 
     // Vinyl click → toggle panel
@@ -582,17 +588,29 @@
       bgm.volume = parseFloat(volSlider.value);
     });
 
-    // Lightbox
+    // Lightbox — push extra state when opened
     document.querySelectorAll('.photo-frame').forEach(frame => {
       frame.addEventListener('click', () => {
         lightboxImg.src = frame.dataset.src;
         lightbox.classList.add('open');
+        history.pushState({ page: 'lightbox' }, '');
       });
     });
-    function closeLightbox() { lightbox.classList.remove('open'); }
-    lightboxClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+
+    lightboxClose.addEventListener('click', () => {
+      history.back(); // triggers popstate → closeLightbox
+    });
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) history.back();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) history.back();
+    });
   </script>
 </body>
 </html>
