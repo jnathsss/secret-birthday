@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HBD Gitaaaaa</title>
+  <title>⋆</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,7 +41,6 @@
       z-index: 100;
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
-
     #envelope-screen.hidden {
       opacity: 0;
       visibility: hidden;
@@ -57,17 +56,12 @@
     }
     .envelope-wrap:hover { transform: translateY(-4px); }
 
-    .envelope-img {
-      width: 100%;
-      border-radius: 10px;
-      display: block;
-    }
+    .envelope-img { width: 100%; border-radius: 10px; display: block; }
 
     .envelope-hint-overlay {
       position: absolute;
       bottom: 5px;
-      left: 0;
-      right: 0;
+      left: 0; right: 0;
       text-align: center;
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -77,7 +71,6 @@
       text-shadow: 0 1px 6px rgba(255,255,255,0.7);
       animation: floatHint 2.5s ease-in-out infinite;
     }
-
     @keyframes floatHint {
       0%, 100% { transform: translateY(0); opacity: 0.75; }
       50% { transform: translateY(-4px); opacity: 1; }
@@ -102,13 +95,9 @@
       margin: 0 auto;
       padding: 60px 32px 100px;
     }
+    #letter-content.visible { opacity: 1; transform: translateY(0); }
 
-    #letter-content.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── MUSIC PLAYER ── */
+    /* ── VINYL PLAYER ── */
     #music-player {
       position: fixed;
       bottom: 28px;
@@ -117,13 +106,87 @@
       display: none;
       flex-direction: column;
       align-items: flex-end;
-      gap: 10px;
+      gap: 0;
     }
-
     #music-player.visible { display: flex; }
 
+    /* Collapsed state: just vinyl disc */
+    .vinyl-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .vinyl-disc {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #2a2420 0deg 30deg,
+        #3d3028 30deg 60deg,
+        #2a2420 60deg 90deg,
+        #3d3028 90deg 120deg,
+        #2a2420 120deg 150deg,
+        #3d3028 150deg 180deg,
+        #2a2420 180deg 210deg,
+        #3d3028 210deg 240deg,
+        #2a2420 240deg 270deg,
+        #3d3028 270deg 300deg,
+        #2a2420 300deg 330deg,
+        #3d3028 330deg 360deg
+      );
+      box-shadow: 0 3px 16px rgba(42,36,32,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.2s ease;
+    }
+    .vinyl-btn:hover .vinyl-disc { box-shadow: 0 4px 20px rgba(42,36,32,0.45); }
+
+    .vinyl-disc.spinning {
+      animation: spin 3s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .vinyl-center {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--dusty-rose);
+      border: 2px solid var(--blush);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .vinyl-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--warm-white);
+    }
+
+    /* Expanded player panel */
+    .player-panel {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+      margin-bottom: 0;
+    }
+    .player-panel.open {
+      max-height: 140px;
+      opacity: 1;
+      margin-bottom: 10px;
+    }
+
     .player-card {
-      background: rgba(253, 250, 247, 0.9);
+      background: rgba(253, 250, 247, 0.92);
       backdrop-filter: blur(12px);
       border: 1px solid var(--blush);
       border-radius: 16px;
@@ -132,25 +195,12 @@
       align-items: center;
       gap: 14px;
       box-shadow: 0 4px 24px rgba(122, 101, 88, 0.12);
-    }
-
-    .player-info { text-align: left; }
-    .player-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--charcoal);
-      letter-spacing: 0.03em;
-    }
-    .player-artist {
-      font-size: 11px;
-      color: var(--light-brown);
-      margin-top: 2px;
+      white-space: nowrap;
     }
 
     #play-btn {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: var(--dusty-rose);
       border: none;
@@ -158,11 +208,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13px;
       transition: background 0.2s ease, transform 0.15s ease;
       flex-shrink: 0;
     }
     #play-btn:hover { background: var(--soft-brown); transform: scale(1.08); }
+
+    .player-info { text-align: left; }
+    .player-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      color: var(--charcoal);
+      letter-spacing: 0.03em;
+    }
+    .player-artist { font-size: 11px; color: var(--light-brown); margin-top: 2px; }
 
     .volume-row {
       display: flex;
@@ -170,11 +229,11 @@
       gap: 8px;
       margin-top: 8px;
     }
-    .vol-icon { font-size: 12px; color: var(--light-brown); }
+    .vol-icon { font-size: 11px; color: var(--light-brown); }
     #volume-slider {
       -webkit-appearance: none;
       appearance: none;
-      width: 90px;
+      width: 80px;
       height: 3px;
       border-radius: 2px;
       background: var(--blush);
@@ -183,8 +242,8 @@
     }
     #volume-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       background: var(--dusty-rose);
       cursor: pointer;
@@ -200,7 +259,6 @@
       margin-bottom: 48px;
       text-align: right;
     }
-
     .letter-greeting {
       font-family: 'Cormorant Garamond', serif;
       font-size: 28px;
@@ -209,14 +267,13 @@
       margin-bottom: 32px;
       letter-spacing: 0.02em;
     }
-
     .letter-body {
       font-size: 15px;
       line-height: 1.85;
       color: var(--soft-brown);
       margin-bottom: 32px;
+      text-align: justify;
     }
-
     .letter-body p { margin-bottom: 20px; }
     .letter-body p:last-child { margin-bottom: 0; }
 
@@ -227,11 +284,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-
-    .photo-section .photo-main {
-      grid-column: 1 / -1;
-    }
-
+    .photo-section .photo-main { grid-column: 1 / -1; }
     .photo-frame {
       background: var(--warm-white);
       border: 1px solid var(--blush);
@@ -245,7 +298,6 @@
       box-shadow: 0 8px 24px rgba(122, 101, 88, 0.14);
     }
     .photo-frame:nth-child(even):hover { transform: translateY(-3px) rotate(-0.5deg); }
-
     .photo-frame img {
       width: 100%;
       height: 200px;
@@ -254,7 +306,6 @@
       filter: saturate(0.85) brightness(1.02);
     }
     .photo-main .photo-frame img { height: 260px; }
-
     .photo-caption {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -284,8 +335,8 @@
       color: var(--charcoal);
       margin-top: 48px;
       line-height: 2;
+      text-align: justify;
     }
-
     .letter-sign {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -315,8 +366,7 @@
     }
     #lightbox-close {
       position: absolute;
-      top: 24px;
-      right: 28px;
+      top: 24px; right: 28px;
       font-size: 24px;
       color: #fff;
       cursor: pointer;
@@ -332,6 +382,7 @@
       .photo-section { grid-template-columns: 1fr; }
       .photo-section .photo-main { grid-column: 1; }
       #music-player { bottom: 16px; right: 16px; }
+      #back-btn { top: 16px; left: 16px; }
     }
   </style>
 </head>
@@ -351,20 +402,32 @@
     <source src="NIKI - Paths.mp3" type="audio/mpeg"/>
   </audio>
 
-  <!-- ── MUSIC PLAYER UI ── -->
+  <!-- ── VINYL PLAYER ── -->
   <div id="music-player">
-    <div class="player-card">
-      <button id="play-btn" aria-label="Play/Pause">▶</button>
-      <div class="player-info">
-        <div class="player-title">Paths</div>
-        <div class="player-artist">NIKI</div>
-        <div class="volume-row">
-          <span class="vol-icon">🔈</span>
-          <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.55"/>
-          <span class="vol-icon">🔊</span>
+    <!-- Expandable panel (above vinyl) -->
+    <div class="player-panel" id="player-panel">
+      <div class="player-card">
+        <button id="play-btn" aria-label="Play/Pause">▶</button>
+        <div class="player-info">
+          <div class="player-title">Paths</div>
+          <div class="player-artist">NIKI</div>
+          <div class="volume-row">
+            <span class="vol-icon">🔈</span>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.55"/>
+            <span class="vol-icon">🔊</span>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Vinyl disc toggle -->
+    <button class="vinyl-btn" id="vinyl-btn" aria-label="Toggle player">
+      <div class="vinyl-disc" id="vinyl-disc">
+        <div class="vinyl-center">
+          <div class="vinyl-dot"></div>
+        </div>
+      </div>
+    </button>
   </div>
 
   <!-- ── LIGHTBOX ── -->
@@ -375,26 +438,22 @@
 
   <!-- ── LETTER ── -->
   <div id="letter-content">
-
-    <div class="letter-date">21 Agustus 2026</div>
-
+    <div class="letter-date">21 August 2026</div>
     <div class="letter-greeting">hey, happy birthday gita</div>
 
-    <!-- SURAT ATAS -->
     <div class="letter-body">
       <p>
         Happy 19th birthday, Gita! Jesus bless you and wish you all the best. Semoga dilancarkan terus ya for your kuliahan.
-        Jiayou for your pharmacist study, semoga udah kebal laprak yah hahaha...
+        Jiayou for your pharmacy study, semoga udah kebal laprak yah hahaha...
         Pray the best too for your pelayanan life at GSJA! ✨
       </p>
     </div>
 
-    <!-- PHOTOS -->
     <div class="photo-section">
       <div class="photo-main">
         <div class="photo-frame" data-src="herPhoto1.jpg">
           <img src="herPhoto1.jpg" alt="photo 1"/>
-          <div class="photo-caption">☁︎</div>
+          <div class="photo-caption">☁️</div>
         </div>
       </div>
       <div>
@@ -417,13 +476,10 @@
       <div class="divider-line"></div>
     </div>
 
-    <!-- SURAT BAWAH -->
     <div class="letter-body">
+      <p>Hello Gita! Udah lama gatau kabarmu, how are you btw? I hope you good as always.</p>
       <p>
-        Hello Gita! Udah lama gatau kabarmu, how are you btw? I hope you good as always.
-      </p>
-      <p>
-        My life has been pretty busy lately. Lagi fokus banget study the best for my comsci college (belajar MTK)
+        My life has been pretty busy lately. Lagi fokus banget study the best for my comsci college 
         then aku lagi try to grinding my coding skills. Fyi, aku coba latihan try and failure with this birthday project
         for you dari akhir June kemaren mumpung libur kuliah jg.
         I figured it would be a fun and lowkey way to celebrate your birthday! 
@@ -443,63 +499,96 @@
       warmly,<br/>
       <span class="letter-sign">Jo</span>
     </div>
-
   </div>
 
   <script>
     const envelopeScreen = document.getElementById('envelope-screen');
     const letterContent  = document.getElementById('letter-content');
     const musicPlayer    = document.getElementById('music-player');
+    const openBtn        = document.getElementById('open-btn');
     const bgm            = document.getElementById('bgm');
     const playBtn        = document.getElementById('play-btn');
     const volSlider      = document.getElementById('volume-slider');
     const lightbox       = document.getElementById('lightbox');
     const lightboxImg    = document.getElementById('lightbox-img');
     const lightboxClose  = document.getElementById('lightbox-close');
-    const openBtn        = document.getElementById('open-btn');
+    const vinylBtn       = document.getElementById('vinyl-btn');
+    const vinylDisc      = document.getElementById('vinyl-disc');
+    const playerPanel    = document.getElementById('player-panel');
 
     bgm.volume = parseFloat(volSlider.value);
     let isPlaying = false;
+    let panelOpen = false;
 
     function startMusic() {
       bgm.play().then(() => {
         isPlaying = true;
         playBtn.textContent = '⏸';
+        vinylDisc.classList.add('spinning');
       }).catch(() => {});
     }
 
-    openBtn.addEventListener('click', () => {
+    function stopMusic() {
+      bgm.pause();
+      isPlaying = false;
+      playBtn.textContent = '▶';
+      vinylDisc.classList.remove('spinning');
+    }
+
+    function showEnvelope() {
+      letterContent.classList.remove('visible');
+      musicPlayer.classList.remove('visible');
+      panelOpen = false;
+      playerPanel.classList.remove('open');
+      stopMusic();
+      setTimeout(() => {
+        envelopeScreen.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 300);
+    }
+
+    function showLetter() {
       envelopeScreen.classList.add('hidden');
       setTimeout(() => {
         letterContent.classList.add('visible');
         musicPlayer.classList.add('visible');
         startMusic();
       }, 500);
+    }
+
+    // Open letter — push state so browser back works
+    openBtn.addEventListener('click', () => {
+      history.pushState({ page: 'letter' }, '');
+      showLetter();
     });
 
+    // Browser/phone back button
+    window.addEventListener('popstate', () => {
+      showEnvelope();
+    });
+
+    // Vinyl click → toggle panel
+    vinylBtn.addEventListener('click', () => {
+      panelOpen = !panelOpen;
+      playerPanel.classList.toggle('open', panelOpen);
+    });
+
+    // Play/pause inside panel
     playBtn.addEventListener('click', () => {
-      if (isPlaying) {
-        bgm.pause();
-        isPlaying = false;
-        playBtn.textContent = '▶';
-      } else {
-        bgm.play();
-        isPlaying = true;
-        playBtn.textContent = '⏸';
-      }
+      if (isPlaying) { stopMusic(); } else { startMusic(); }
     });
 
     volSlider.addEventListener('input', () => {
       bgm.volume = parseFloat(volSlider.value);
     });
 
+    // Lightbox
     document.querySelectorAll('.photo-frame').forEach(frame => {
       frame.addEventListener('click', () => {
         lightboxImg.src = frame.dataset.src;
         lightbox.classList.add('open');
       });
     });
-
     function closeLightbox() { lightbox.classList.remove('open'); }
     lightboxClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
