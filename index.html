@@ -4,18 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>𓏲๋࣭࣪˖🍶🎐🐇⋆ﾟ☁︎｡⋆</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&family=Playfair+Display:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --cream: #F7F3EE;
       --warm-white: #FDFAF7;
-      --blush: #E8D5C4;
-      --dusty-rose: #C9A99A;
+      --blush: #EDD5C8;
+      --petal: #F2E4DC;
+      --dusty-rose: #C9907E;
+      --rose-mid: #B87A6A;
       --charcoal: #3A3530;
       --soft-brown: #7A6558;
       --light-brown: #A08878;
+      --mauve: #D4A9A0;
+      --lavender-mist: #EDE5E8;
     }
 
     html { scroll-behavior: smooth; }
@@ -33,7 +37,7 @@
     #envelope-screen {
       position: fixed;
       inset: 0;
-      background: var(--cream);
+      background: linear-gradient(160deg, #FBF6F1 0%, #F3E9E2 50%, #EDE0D8 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -47,16 +51,39 @@
       pointer-events: none;
     }
 
+    /* floating petals decoration */
+    #envelope-screen::before {
+      content: "✿  ˚  ✦  ˚  ✿  ˚  ✦  ˚  ✿";
+      position: absolute;
+      top: 40px;
+      font-size: 12px;
+      color: var(--mauve);
+      letter-spacing: 0.18em;
+      opacity: 0.55;
+    }
+    #envelope-screen::after {
+      content: "✦  ˚  ✿  ˚  ✦  ˚  ✿  ˚  ✦";
+      position: absolute;
+      bottom: 40px;
+      font-size: 12px;
+      color: var(--mauve);
+      letter-spacing: 0.18em;
+      opacity: 0.55;
+    }
+
     .envelope-wrap {
       position: relative;
       width: 280px;
       cursor: pointer;
-      filter: drop-shadow(0 10px 36px rgba(122, 101, 88, 0.22));
-      transition: transform 0.35s ease;
+      filter: drop-shadow(0 12px 40px rgba(180, 130, 110, 0.25));
+      transition: transform 0.35s ease, filter 0.35s ease;
     }
-    .envelope-wrap:hover { transform: translateY(-4px); }
+    .envelope-wrap:hover {
+      transform: translateY(-6px);
+      filter: drop-shadow(0 20px 50px rgba(180, 130, 110, 0.35));
+    }
 
-    .envelope-img { width: 100%; border-radius: 10px; display: block; }
+    .envelope-img { width: 100%; border-radius: 12px; display: block; }
 
     .envelope-hint-overlay {
       position: absolute;
@@ -93,11 +120,11 @@
       transition: opacity 0.9s ease, transform 0.9s ease;
       max-width: 640px;
       margin: 0 auto;
-      padding: 60px 32px 100px;
+      padding: 60px 32px 120px;
     }
     #letter-content.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── VINYL PLAYER ── */
+    /* ── VINYL PLAYER — REDESIGNED ── */
     #music-player {
       position: fixed;
       bottom: 28px;
@@ -110,10 +137,10 @@
     }
     #music-player.visible { display: flex; }
 
-    /* Collapsed state: just vinyl disc */
+    /* Vinyl disc button */
     .vinyl-btn {
-      width: 52px;
-      height: 52px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       cursor: pointer;
       border: none;
@@ -121,33 +148,54 @@
       padding: 0;
       position: relative;
       flex-shrink: 0;
+      filter: drop-shadow(0 4px 16px rgba(140, 90, 80, 0.3));
+      transition: filter 0.2s ease;
+    }
+    .vinyl-btn:hover {
+      filter: drop-shadow(0 6px 24px rgba(140, 90, 80, 0.45));
     }
 
     .vinyl-disc {
-      width: 52px;
-      height: 52px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       background: conic-gradient(
-        #2a2420 0deg 30deg,
-        #3d3028 30deg 60deg,
-        #2a2420 60deg 90deg,
-        #3d3028 90deg 120deg,
-        #2a2420 120deg 150deg,
-        #3d3028 150deg 180deg,
-        #2a2420 180deg 210deg,
-        #3d3028 210deg 240deg,
-        #2a2420 240deg 270deg,
-        #3d3028 270deg 300deg,
-        #2a2420 300deg 330deg,
-        #3d3028 330deg 360deg
+        #2a2420 0deg 25deg,
+        #3d2e2a 25deg 50deg,
+        #2a2420 50deg 75deg,
+        #3d2e2a 75deg 100deg,
+        #2a2420 100deg 125deg,
+        #3d2e2a 125deg 150deg,
+        #2a2420 150deg 175deg,
+        #3d2e2a 175deg 200deg,
+        #2a2420 200deg 225deg,
+        #3d2e2a 225deg 250deg,
+        #2a2420 250deg 275deg,
+        #3d2e2a 275deg 300deg,
+        #2a2420 300deg 325deg,
+        #3d2e2a 325deg 360deg
       );
-      box-shadow: 0 3px 16px rgba(42,36,32,0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: box-shadow 0.2s ease;
+      position: relative;
     }
-    .vinyl-btn:hover .vinyl-disc { box-shadow: 0 4px 20px rgba(42,36,32,0.45); }
+
+    /* sheen ring on vinyl */
+    .vinyl-disc::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .vinyl-disc::after {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
 
     .vinyl-disc.spinning {
       animation: spin 3s linear infinite;
@@ -155,20 +203,22 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .vinyl-center {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      background: var(--dusty-rose);
-      border: 2px solid var(--blush);
+      background: linear-gradient(135deg, var(--dusty-rose) 0%, var(--mauve) 100%);
+      border: 2px solid rgba(255,255,255,0.35);
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 1;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.25);
     }
     .vinyl-dot {
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background: var(--warm-white);
+      background: rgba(255,255,255,0.85);
     }
 
     /* Expanded player panel */
@@ -176,78 +226,171 @@
       overflow: hidden;
       max-height: 0;
       opacity: 0;
-      transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, margin 0.3s ease;
       margin-bottom: 0;
     }
     .player-panel.open {
-      max-height: 140px;
+      max-height: 180px;
       opacity: 1;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
+    /* ── PLAYER CARD — REDESIGNED ── */
     .player-card {
-      background: rgba(253, 250, 247, 0.92);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--blush);
-      border-radius: 16px;
-      padding: 14px 18px;
+      background: rgba(253, 250, 247, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(219, 185, 170, 0.55);
+      border-radius: 20px;
+      padding: 16px 18px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow:
+        0 8px 32px rgba(180, 130, 110, 0.14),
+        0 1px 0 rgba(255,255,255,0.7) inset;
+      min-width: 210px;
+    }
+
+    /* top row: info + play */
+    .player-top-row {
       display: flex;
       align-items: center;
-      gap: 14px;
-      box-shadow: 0 4px 24px rgba(122, 101, 88, 0.12);
-      white-space: nowrap;
+      gap: 12px;
     }
 
+    .player-info { text-align: left; flex: 1; }
+    .player-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13.5px;
+      color: var(--charcoal);
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+    }
+    .player-artist {
+      font-size: 11px;
+      color: var(--light-brown);
+      margin-top: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── PLAY / PAUSE BUTTON — REDESIGNED ── */
     #play-btn {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: var(--dusty-rose);
       border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
-      transition: background 0.2s ease, transform 0.15s ease;
       flex-shrink: 0;
+      position: relative;
+      background: linear-gradient(135deg, #D4937F 0%, #C07060 100%);
+      box-shadow:
+        0 3px 12px rgba(180, 100, 80, 0.35),
+        0 1px 0 rgba(255,255,255,0.25) inset;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      overflow: hidden;
     }
-    #play-btn:hover { background: var(--soft-brown); transform: scale(1.08); }
+    #play-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+    }
+    #play-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 18px rgba(180, 100, 80, 0.45), 0 1px 0 rgba(255,255,255,0.25) inset;
+    }
+    #play-btn:active { transform: scale(0.96); }
 
-    .player-info { text-align: left; }
-    .player-title {
-      font-family: 'Cormorant Garamond', serif;
+    .play-icon {
+      position: relative;
+      z-index: 1;
+      color: #fff;
       font-size: 13px;
-      color: var(--charcoal);
-      letter-spacing: 0.03em;
+      line-height: 1;
+      /* nudge play icon slightly right for optical centering */
     }
-    .player-artist { font-size: 11px; color: var(--light-brown); margin-top: 2px; }
+    .play-icon.is-play { padding-left: 2px; }
 
+    /* ── VOLUME ROW — REDESIGNED ── */
     .volume-row {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-top: 8px;
     }
-    .vol-icon { font-size: 11px; color: var(--light-brown); }
+
+    .vol-icon {
+      font-size: 12px;
+      opacity: 0.55;
+      color: var(--soft-brown);
+      flex-shrink: 0;
+    }
+
+    /* Custom slider */
     #volume-slider {
       -webkit-appearance: none;
       appearance: none;
-      width: 80px;
-      height: 3px;
-      border-radius: 2px;
-      background: var(--blush);
+      flex: 1;
+      height: 4px;
+      border-radius: 99px;
       outline: none;
       cursor: pointer;
+      background: linear-gradient(to right, var(--dusty-rose) var(--vol-pct, 55%), var(--blush) var(--vol-pct, 55%));
+      transition: background 0.1s;
     }
     #volume-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 11px;
-      height: 11px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      background: var(--dusty-rose);
+      background: linear-gradient(135deg, #D4937F 0%, #C07060 100%);
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 1px 6px rgba(160, 80, 60, 0.35);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    #volume-slider::-webkit-slider-thumb:hover { transform: scale(1.25); }
+    #volume-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #D4937F 0%, #C07060 100%);
+      border: 2px solid rgba(255,255,255,0.9);
+      box-shadow: 0 1px 6px rgba(160, 80, 60, 0.35);
       cursor: pointer;
     }
+    #volume-slider::-moz-range-track {
+      height: 4px;
+      border-radius: 99px;
+      background: var(--blush);
+    }
+
+    /* subtle now-playing pulse bar */
+    .now-playing {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 12px;
+      margin-left: auto;
+    }
+    .bar {
+      width: 3px;
+      border-radius: 99px;
+      background: var(--dusty-rose);
+      opacity: 0.7;
+    }
+    .bar:nth-child(1) { animation: pulse 1.0s ease-in-out infinite; }
+    .bar:nth-child(2) { animation: pulse 1.0s ease-in-out 0.2s infinite; }
+    .bar:nth-child(3) { animation: pulse 1.0s ease-in-out 0.4s infinite; }
+    @keyframes pulse {
+      0%, 100% { height: 4px; opacity: 0.4; }
+      50% { height: 12px; opacity: 0.85; }
+    }
+    .now-playing.paused .bar { animation-play-state: paused; height: 4px; opacity: 0.3; }
 
     /* ── LETTER ── */
     .letter-date {
@@ -378,11 +521,11 @@
     #lightbox-close:hover { opacity: 1; }
 
     @media (max-width: 480px) {
-      #letter-content { padding: 40px 20px 80px; }
+      #letter-content { padding: 40px 20px 100px; }
       .photo-section { grid-template-columns: 1fr; }
       .photo-section .photo-main { grid-column: 1; }
       #music-player { bottom: 16px; right: 16px; }
-      #back-btn { top: 16px; left: 16px; }
+      .player-card { min-width: 190px; }
     }
   </style>
 </head>
@@ -407,15 +550,29 @@
     <!-- Expandable panel (above vinyl) -->
     <div class="player-panel" id="player-panel">
       <div class="player-card">
-        <button id="play-btn" aria-label="Play/Pause">▶</button>
-        <div class="player-info">
-          <div class="player-title">Paths</div>
-          <div class="player-artist">NIKI</div>
-          <div class="volume-row">
-            <span class="vol-icon">🔈</span>
-            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.55"/>
-            <span class="vol-icon">🔊</span>
+        <!-- Top row: info + play btn -->
+        <div class="player-top-row">
+          <div class="player-info">
+            <div class="player-title">Paths</div>
+            <div class="player-artist">NIKI</div>
           </div>
+          <!-- now-playing bars -->
+          <div class="now-playing" id="now-playing-bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <!-- play/pause -->
+          <button id="play-btn" aria-label="Play/Pause">
+            <span class="play-icon is-play" id="play-icon">▶</span>
+          </button>
+        </div>
+
+        <!-- Volume row -->
+        <div class="volume-row">
+          <span class="vol-icon">♩</span>
+          <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.55"/>
+          <span class="vol-icon">♪</span>
         </div>
       </div>
     </div>
@@ -508,6 +665,7 @@
     const openBtn        = document.getElementById('open-btn');
     const bgm            = document.getElementById('bgm');
     const playBtn        = document.getElementById('play-btn');
+    const playIcon       = document.getElementById('play-icon');
     const volSlider      = document.getElementById('volume-slider');
     const lightbox       = document.getElementById('lightbox');
     const lightboxImg    = document.getElementById('lightbox-img');
@@ -515,40 +673,46 @@
     const vinylBtn       = document.getElementById('vinyl-btn');
     const vinylDisc      = document.getElementById('vinyl-disc');
     const playerPanel    = document.getElementById('player-panel');
+    const nowPlayingBars = document.getElementById('now-playing-bars');
 
     bgm.volume = parseFloat(volSlider.value);
     let isPlaying = false;
     let panelOpen = false;
     let pausedByVisibility = false;
 
-    // Pause when tab hidden, resume when tab visible again
+    // Update slider gradient to show progress
+    function updateSliderFill() {
+      const pct = (parseFloat(volSlider.value) * 100).toFixed(1) + '%';
+      volSlider.style.setProperty('--vol-pct', pct);
+    }
+    updateSliderFill();
+
+    // Pause when tab hidden, resume when visible
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (isPlaying) {
-          bgm.pause();
-          pausedByVisibility = true;
-        }
+        if (isPlaying) { bgm.pause(); pausedByVisibility = true; }
       } else {
-        if (pausedByVisibility) {
-          bgm.play().catch(() => {});
-          pausedByVisibility = false;
-        }
+        if (pausedByVisibility) { bgm.play().catch(() => {}); pausedByVisibility = false; }
       }
     });
 
     function startMusic() {
       bgm.play().then(() => {
         isPlaying = true;
-        playBtn.textContent = '⏸';
+        playIcon.textContent = '⏸';
+        playIcon.classList.remove('is-play');
         vinylDisc.classList.add('spinning');
+        nowPlayingBars.classList.remove('paused');
       }).catch(() => {});
     }
 
     function stopMusic() {
       bgm.pause();
       isPlaying = false;
-      playBtn.textContent = '▶';
+      playIcon.textContent = '▶';
+      playIcon.classList.add('is-play');
       vinylDisc.classList.remove('spinning');
+      nowPlayingBars.classList.add('paused');
     }
 
     function showEnvelope() {
@@ -572,19 +736,15 @@
       }, 500);
     }
 
-    // Open letter — push state: envelope → letter
     openBtn.addEventListener('click', () => {
       history.pushState({ page: 'letter' }, '');
       showLetter();
     });
 
-    // Browser/phone back
     window.addEventListener('popstate', (e) => {
       if (lightbox.classList.contains('open')) {
-        // back while lightbox open → just close lightbox, stay in letter
         closeLightbox();
       } else {
-        // back while in letter → go to envelope
         showEnvelope();
       }
     });
@@ -595,16 +755,16 @@
       playerPanel.classList.toggle('open', panelOpen);
     });
 
-    // Play/pause inside panel
     playBtn.addEventListener('click', () => {
       if (isPlaying) { stopMusic(); } else { startMusic(); }
     });
 
     volSlider.addEventListener('input', () => {
       bgm.volume = parseFloat(volSlider.value);
+      updateSliderFill();
     });
 
-    // Lightbox — push extra state when opened
+    // Lightbox
     document.querySelectorAll('.photo-frame').forEach(frame => {
       frame.addEventListener('click', () => {
         lightboxImg.src = frame.dataset.src;
@@ -618,12 +778,8 @@
       lightboxImg.src = '';
     }
 
-    lightboxClose.addEventListener('click', () => {
-      history.back(); // triggers popstate → closeLightbox
-    });
-    lightbox.addEventListener('click', e => {
-      if (e.target === lightbox) history.back();
-    });
+    lightboxClose.addEventListener('click', () => { history.back(); });
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) history.back(); });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && lightbox.classList.contains('open')) history.back();
     });
