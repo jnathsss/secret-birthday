@@ -6,12 +6,12 @@
   <title>𓏲๋࣭࣪˖🍶🎐🐇⋆ﾟ☁︎｡⋆</title>
 
   <!-- Link preview (WhatsApp/IG/etc) — kept vague on purpose so it doesn't spoil the surprise -->
-  <meta property="og:title" content="🐇⋆ﾟ☁︎｡⋆💌" />
+  <meta property="og:title" content="💌🐇⋆ﾟ☁︎｡⋆" />
   <meta property="og:description" content="tap to open ✦" />
   <meta property="og:image" content="https://hbdbrigitta.netlify.app/mail.gif" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="🐇⋆ﾟ☁︎｡⋆💌" />
+  <meta name="twitter:title" content="💌🐇⋆ﾟ☁︎｡⋆" />
   <meta name="twitter:description" content="tap to open ✦" />
   <meta name="twitter:image" content="https://hbdbrigitta.netlify.app/mail.gif" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&family=Playfair+Display:ital,wght@0,400;1,300;1,400&display=swap" rel="stylesheet"/>
@@ -426,6 +426,9 @@
       color: var(--soft-brown);
       margin-bottom: 32px;
       text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      word-spacing: normal;
     }
     .letter-body p { margin-bottom: 20px; }
     .letter-body p:last-child { margin-bottom: 0; }
@@ -489,6 +492,9 @@
       margin-top: 48px;
       line-height: 2;
       text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      word-spacing: normal;
     }
     .letter-sign {
       font-family: 'Cormorant Garamond', serif;
@@ -611,6 +617,8 @@
       .photo-section .photo-main { grid-column: 1; }
       #music-player { bottom: 16px; right: 16px; }
       .player-card { min-width: 190px; }
+      /* narrow screens: justify makes gaps between words look ugly, left align reads cleaner */
+      .letter-body, .letter-closing { text-align: left; }
     }
   </style>
 </head>
