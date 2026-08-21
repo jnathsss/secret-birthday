@@ -426,8 +426,12 @@
       color: var(--soft-brown);
       margin-bottom: 32px;
       text-align: justify;
+      text-align-last: left;
+      text-justify: inter-word;
       hyphens: auto;
       -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      overflow-wrap: break-word;
       word-spacing: normal;
     }
     .letter-body p { margin-bottom: 20px; }
@@ -492,8 +496,12 @@
       margin-top: 48px;
       line-height: 2;
       text-align: justify;
+      text-align-last: left;
+      text-justify: inter-word;
       hyphens: auto;
       -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      overflow-wrap: break-word;
       word-spacing: normal;
     }
     .letter-sign {
@@ -617,8 +625,12 @@
       .photo-section .photo-main { grid-column: 1; }
       #music-player { bottom: 16px; right: 16px; }
       .player-card { min-width: 190px; }
-      /* narrow screens: justify makes gaps between words look ugly, left align reads cleaner */
-      .letter-body, .letter-closing { text-align: left; }
+      /* narrow screens: shorter lines = fewer words per line, so justify can stretch gaps wide.
+         Hyphenation + tighter tracking keeps it justified but still tidy. */
+      .letter-body, .letter-closing {
+        font-size: 14px;
+        letter-spacing: 0.005em;
+      }
     }
   </style>
 </head>
@@ -731,7 +743,7 @@
     <div class="letter-body">
       <p>Hello Gita! Udah lama gatau kabarmu, how are you btw? I hope you good as always.  
       </p>
-      <p>My life has been pretty busy lately (Menyibukkan diri hahaha).Lagi suka ngulik-ngulik for my comsci college
+      <p>My life has been pretty busy lately(Menyibukkan diri hahaha). Lagi suka ngulik-ngulik for my comsci college
         then aku lagi try to grinding my coding skills. 
       </p>
       <p>Funfact aku coba latihan try and failure with this birthday project
